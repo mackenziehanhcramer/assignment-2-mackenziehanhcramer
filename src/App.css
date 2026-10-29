@@ -1,1 +1,63 @@
-/* Paste your Assignment 1 styles.css here. Keep the icons in src/assets/ so url(assets/...) paths keep working. */
+/* This is your CSS files */
+@import url('https://googleapis.com');
+
+body {
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+/* Use clear section comments */
+/* ========== HEADER STYLES ========== */
+.main-header { 
+    background-color: #dc4c3e;
+    color: #ffffff;
+    position: relative;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 16px;
+ }
+
+ .container {
+    display:flex;
+ }
+
+/* ========== NAVIGATION STYLES ========== */
+.sidebar { 
+    background-color: #fefbf2;
+    color: #000000;
+    align-items: center;
+    width: 300px;
+    display: flex;
+ }
+
+ .sidebar span.count { 
+    color: #7e7d79;
+    font-size: 12px;
+ }
+
+ .sidebar ul {
+    list-style:none;
+ }
+
+/* ========== MAIN CONTENT STYLES ========== */
+.main-content{ 
+    background-color: #fefbf2;
+    color: #000000;
+    align-items: center;
+    width: 100%;
+ }
+
+.main-content h1 {
+    font-size: 20px;
+}
+
+.main-content ul {
+    list-style:none;
+ }
+
+/* ========== RESPONSIVE STYLES ========== */
+@media (max-width: 480px) { 
+    .sidebar {display:none;}
+}
