@@ -3,7 +3,7 @@ import React from 'react';
 
 function TaskItem({ task, onToggle, onDelete }) {
   return (
-    <div className={`task-item ${task.completed ? 'completed' : ''}`}>
+    <li className={`task-item ${task.completed ? 'completed' : ''}`}>
       <input
         type="checkbox"
         checked={task.completed}
@@ -22,7 +22,7 @@ function TaskItem({ task, onToggle, onDelete }) {
       >
         Delete
       </button>
-    </div>
+    </li>
   );
 }
 

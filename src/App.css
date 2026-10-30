@@ -7,7 +7,6 @@ body {
     font-size: 14px;
 }
 
-/* Use clear section comments */
 /* ========== HEADER STYLES ========== */
 .main-header { 
     background-color: #dc4c3e;
@@ -57,7 +56,98 @@ body {
     list-style:none;
  }
 
+/* ========== FILTER BUTTONS ========== */
+.filter-buttons {
+    display: flex;
+    align-items: center;
+    color: #666;
+}
+
+.filter-buttons button {
+    background: none;
+    border: none;
+    color: #555;
+}
+
+.filter-buttons button:hover {
+    background-color: #f0eae1;
+}
+
+.filter-buttons button.active-filter {
+    color: #dc4c3e;
+    font-weight: bold;
+}
+
+/* ========== TASK FORM STYLES ========== */
+.task-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.task-form input[type="text"] {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.task-form button {
+    background-color: #dc4c3e;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.task-form button:hover {
+    background-color: #c53d30;
+}
+
+/* ========== TASK ITEM STYLES ========== */
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0eae1;
+}
+
+.task-item:hover {
+    background-color: #f8f4ec;
+}
+
+.task-item label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.task-item.completed .task-text,
+.task-text[style*="line-through"] {
+    color: #888;
+    opacity: 0.7;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 16px;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.delete-btn:hover {
+    background-color: #ffeaea;
+    color: #dc4c3e;
+}
+
 /* ========== RESPONSIVE STYLES ========== */
 @media (max-width: 480px) { 
-    .sidebar {display:none;}
+    .sidebar { display: none; }
 }

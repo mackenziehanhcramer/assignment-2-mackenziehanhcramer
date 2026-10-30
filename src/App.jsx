@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import './App.css'
-import './components/TaskCounter.jsx'
-import './components/TaskForm.jsx'
-import './components/TaskItem.jsx'
-import './components/TaskList.jsx'
+import TaskCounter from './components/TaskCounter.jsx'
+import TaskForm from './components/TaskForm.jsx'
+import TaskList from './components/TaskList.jsx'
 
 import inbox_icon from './assets/inbox_icon.png';
 import calendar_icon from './assets/calendar_icon.png';
@@ -18,6 +17,45 @@ import menu_icon from "./assets/menu_icon.png";
 // Step 2 (after the Oct 19 class): useState, the controlled form, toggle, delete, filtering.
 function App() {
   
+  const [tasks, setTasks] = useState([
+    { id: 1, text: "Call Mom", completed: false },
+    { id: 2, text: "Buy the new issue of Scientific American", completed: false },
+    { id: 3, text: "Return the textbook to Josie", completed: false },
+    { id: 4, text: "Buy the new album by Rake", completed: false },
+    { id: 5, text: "Buy a gift card for Dad", completed: false }
+  ]);
+
+  const [filter, setFilter] = useState("All");
+
+  const addTask = (text) => {
+    if (!text.trim()) return;
+    const newTask = {
+      id: Date.now(),
+      text: text.trim(),
+      completed: false
+    };
+    setTasks([...tasks, newTask]);
+  };
+
+  const toggleTask = (id) => {
+    setTasks(tasks.map(task => 
+      task.id === id ? { ...task, completed: !task.completed } : task
+    ));
+  };
+
+  const deleteTask = (id) => {
+    setTasks(tasks.filter(task => task.id !== id));
+  };
+
+  const filteredTasks = tasks.filter(task => {
+    if (filter === "Active") return !task.completed;
+    if (filter === "Completed") return task.completed;
+    return true;
+  });
+
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter(task => task.completed).length;
+
   return (
     <>
     <section className='main-header'>
@@ -33,7 +71,7 @@ function App() {
             <span>
                 <p>
                     <img src={check_icon} alt="Check" />
-                    30/5
+                    <TaskCounter tasks={tasks} />
                 </p>
             </span>
     </section>
@@ -43,12 +81,12 @@ function App() {
           <ul className="side">
             <li>
               <img src={inbox_icon} />
-              <span>Inbox</span> <span class="count">5</span>
+              <span>Inbox</span> <span className="count">{totalTasks}</span>
             </li>
 
             <li>
               <img src={calendar_icon} />
-              <span>Today</span> <span class="count">5</span>
+              <span>Today</span> <span className="count">{totalTasks}</span>
             </li>
 
             <li>
@@ -58,24 +96,38 @@ function App() {
           </ul>
         </nav>
 
-        <main class="main-content">
-          <span>
-            <h1>Inbox</h1>
-            <ul>
-              <li>
-                <input type="radio" />
-                Call Mom</li>
-              <li>
-                <input type="radio" />
-                Buy the new issue of Scientific American</li>
-              <li><input type="radio" />
-                Return the textbook to Josie</li>
-              <li><input type="radio" />
-                Buy the new album by Rake</li>
-              <li><input type="radio" />
-                Buy a gift card for Dad</li>
-            </ul>
-          </span>
+        <main className="main-content">
+
+          <div className="filter-buttons" style={{ marginBottom: '15px' }}>
+              <button 
+                className={filter === "All" ? "active-filter" : ""} 
+                onClick={() => setFilter("All")}
+              >
+                All
+              </button>
+              <span> | </span>
+              <button 
+                className={filter === "Active" ? "active-filter" : ""} 
+                onClick={() => setFilter("Active")}
+              >
+                Active
+              </button>
+              <span> | </span>
+              <button 
+                className={filter === "Completed" ? "active-filter" : ""} 
+                onClick={() => setFilter("Completed")}
+              >
+                Completed
+              </button>
+            </div>
+
+            <TaskForm onAdd={addTask} />
+
+            <TaskList 
+              tasks={filteredTasks} 
+              onToggle={toggleTask} 
+              onDelete={deleteTask} 
+            />
         </main>
       </section>
       </>

@@ -1,34 +1,24 @@
 // Form for adding a new task
 import React, { useState } from 'react';
 
-function TaskForm({ onAddTask }) {
-  const [inputText, setInputText] = useState('');
+function TaskForm({ onAdd }) {
+  const [text, setText] = useState('');
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevents the browser from refreshing the page on submit
-    
-    // Don't add empty tasks or tasks with only spaces
-    if (!inputText.trim()) return;
-
-    // Call the parent function passed down as a prop
-    onAddTask(inputText);
-
-    // Reset the input field back to blank
-    setInputText('');
+    e.preventDefault();
+    if (!text.trim()) return;
+    onAdd(text);
+    setText(''); 
   };
 
   return (
-    <form className="task-form" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="task-form">
       <input
         type="text"
-        className="task-input"
-        placeholder="Add a new task..."
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
       />
-      <button type="submit" className="add-btn">
-        Add Task
-      </button>
+      <button type="submit">Add Task</button>
     </form>
   );
 }

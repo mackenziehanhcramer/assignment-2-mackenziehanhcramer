@@ -3,17 +3,22 @@ import React from 'react';
 import TaskItem from './TaskItem';
 
 function TaskList({ tasks, onToggle, onDelete }) {
+
+  if (!tasks || tasks.length === 0) {
+    return;
+  }
+
   return (
-    <div className="task-list">
+    <ul className="task-list">
       {tasks.map((task) => (
-        <TaskItem
-          key={task.id}
-          task={task}
-          onToggle={onToggle}
-          onDelete={onDelete}
+        <TaskItem 
+          key={task.id} 
+          task={task} 
+          onToggle={onToggle} 
+          onDelete={onDelete} 
         />
       ))}
-    </div>
+    </ul>
   );
 }
 
